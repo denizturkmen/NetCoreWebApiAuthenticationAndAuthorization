@@ -10,7 +10,7 @@ using NetCoreWebApiJwtExample.Models;
 
 namespace NetCoreWebApiJwtExample.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {

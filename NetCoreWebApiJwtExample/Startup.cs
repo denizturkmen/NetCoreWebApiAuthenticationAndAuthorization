@@ -34,6 +34,9 @@ namespace NetCoreWebApiJwtExample
 
             services.AddScoped<IEmployeeDal, EfCoreEmployeeDal>();
             services.AddScoped<IEmployeeService, EmployeeManager>();
+
+            services.AddScoped<IPersonDal, EfCoreTaskPersonDal>();
+            services.AddScoped<IPersonService, PersonManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
