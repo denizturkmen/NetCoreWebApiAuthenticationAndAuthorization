@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreWebApiJwtExample.Business.Abstract;
@@ -12,6 +13,7 @@ namespace NetCoreWebApiJwtExample.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class PersonController : ControllerBase
     {
         private IPersonService _personService;
@@ -58,7 +60,7 @@ namespace NetCoreWebApiJwtExample.Controllers
             };
             await _personService.Create(entity);
 
-            return CreatedAtRoute("Gets", new { Id = person.Id }, person);
+            return CreatedAtRoute("Get", new { Id = person.Id }, person);
         }
 
         [HttpPut("{Id}")]

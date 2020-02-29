@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NetCoreWebApiJwtExample.Business.Abstract;
@@ -12,6 +13,7 @@ namespace NetCoreWebApiJwtExample.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private IEmployeeService _employeeService;
@@ -31,7 +33,7 @@ namespace NetCoreWebApiJwtExample.Controllers
         [HttpGet("{Id}", Name = "Get")]
         public IActionResult Get(int id)
         {
-            
+
             var employee = _employeeService.GetById(id);
             if (employee == null)
             {
@@ -53,13 +55,13 @@ namespace NetCoreWebApiJwtExample.Controllers
                 Name = employee.Name,
                 Salary = employee.Salary
             };
-           
+
             _employeeService.Create(entity);
-            return CreatedAtRoute("Get", new { Id=employee.Id},employee);
+            return CreatedAtRoute("Get", new { Id = employee.Id }, employee);
         }
 
-        [HttpPut("{Id}",Name = "Put")]
-        public IActionResult Put([FromBody] EmployeeModel model,int id)
+        [HttpPut("{Id}", Name = "Put")]
+        public IActionResult Put([FromBody] EmployeeModel model, int id)
         {
             if (model == null)
             {
